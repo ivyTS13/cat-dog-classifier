@@ -8,3 +8,12 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Dataset
+data/
+
+# Trained models
+models/
+
+# Jupyter
+.ipynb_checkpoints/
