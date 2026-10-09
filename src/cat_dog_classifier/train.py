@@ -6,6 +6,7 @@ from torch.optim import Adam
 
 from cat_dog_classifier.dataset import create_dataloaders
 from cat_dog_classifier.model import CatDogCNN
+from cat_dog_classifier.catdog_resnet18 import CatDogResNet18
 
 
 import random
@@ -109,16 +110,19 @@ def main():
         batch_size=32
     )
 
-    model = CatDogCNN().to(device)
+    model = CatDogResNet18().to(device)
 
     loss_function = nn.BCEWithLogitsLoss()
 
     optimizer = Adam(
-        model.parameters(),
+        ## this is for the basic CNN 
+       ## model.parameters(),
+       ## for pretrained model
+        filter(lambda p:p.requires_grad, model.parameters()),
         lr=0.001
     )
 
-    epochs = 20
+    epochs = 5
     best_val_accuracy =0.0
 
     model_path = Path("models/cat_dog_cnn.pth")
