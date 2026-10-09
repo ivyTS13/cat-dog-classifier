@@ -6,6 +6,7 @@ from sklearn.metrics import confusion_matrix, classification_report
 
 from cat_dog_classifier.dataset import create_dataloaders
 from cat_dog_classifier.model import CatDogCNN
+from cat_dog_classifier.catdog_resnet18 import CatDogResNet18
 
 
 def main():
@@ -23,10 +24,13 @@ def main():
     )
 
     # Create the same model architecture
-    model = CatDogCNN().to(device)
+    # for CNN
+    #model = CatDogCNN().to(device)
+    # for pretrained
+    model = CatDogResNet18(pretrained=False).to(device)
 
     # Load the best trained weights
-    model_path = Path("models/cat_dog_cnn.pth")
+    model_path = Path("models/cat_dog_resnet18.pth")
 
     model.load_state_dict(
         torch.load(model_path, map_location=device)

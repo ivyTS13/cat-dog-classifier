@@ -3,10 +3,11 @@ from torch import nn
 from torchvision.models import resnet18, ResNet18_Weights
 
 class CatDogResNet18(nn.Module):
-    def __init__(self):
+    def __init__(self, pretrained=True):
         super().__init__()
 
-        self.backbone = resnet18(weights=ResNet18_Weights.DEFAULT)
+        weights = ResNet18_Weights.DEFAULT if pretrained else None
+        self.backbone = resnet18(weights=weights)
 
         # Freeze all pretrained layers
 
